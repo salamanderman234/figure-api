@@ -23,13 +23,16 @@ func NewFigureController(f domain.FigureService) domain.FigureController {
 func (f *figureController) SearchFiguresWithFilter(c echo.Context) error {
 	// get relevant data from request
 	filter := model.FigureSearch{}
-	err := (&echo.DefaultBinder{}).BindQueryParams(c, filter)
+	err := (&echo.DefaultBinder{}).BindQueryParams(c, &filter)
 	if err != nil {
 		response := model.FailResponse{
 			Error:   "Bad Request",
 			Message: "Missing required field",
 		}
 		return c.JSON(http.StatusBadRequest, response)
+	}
+	if filter.Page == 0 {
+		filter.Page = 1
 	}
 	// calling service
 	result, err := f.figureService.GetWithFilter(filter)

@@ -18,7 +18,6 @@ func NewFigureService(h domain.FigureScrapper) domain.FigureService {
 
 func (f *figureService) GetWithFilter(filter model.FigureSearch) ([]model.Figure, error) {
 	result, err := f.HobbySearchScrapper.Search(filter)
-
 	if err != nil {
 		return nil, err
 	} else if len(result) == 0 {
