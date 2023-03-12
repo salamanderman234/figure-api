@@ -15,6 +15,8 @@ type hobbySearch struct {
 	baseUrl          string
 	searchUrl        string
 	detailProductUrl string
+	source           string
+	sourceMainLink   string
 }
 
 func NewHobbySearchScrapper() domain.FigureScrapper {
@@ -23,7 +25,16 @@ func NewHobbySearchScrapper() domain.FigureScrapper {
 		baseUrl:          base,
 		searchUrl:        `/eng/search?`,
 		detailProductUrl: `/eng/`,
+		source:           "Hobby Search",
+		sourceMainLink:   "www.1999.co.jp",
 	}
+}
+
+func (a *hobbySearch) GetSource() string {
+	return a.source
+}
+func (a *hobbySearch) GetMainLink() string {
+	return a.sourceMainLink
 }
 
 func (a *hobbySearch) DetailProduct(code string) (model.Figure, error) {
@@ -97,6 +108,8 @@ func (a *hobbySearch) DetailProduct(code string) (model.Figure, error) {
 
 	figureMap["name"] = name
 	figureMap["thumbnail"] = thumbnail
+	figureMap["code"] = code
+	figureMap["source"] = a.source
 	// mapping back to model
 	jsonByte, _ := json.Marshal(figureMap)
 	json.Unmarshal(jsonByte, &figure)
@@ -111,7 +124,6 @@ func (a *hobbySearch) Search(filter model.FigureSearch) ([]model.Figure, error) 
 	series := "&ItemSeries=" + strings.ReplaceAll(filter.ItemSeries, " ", "+")
 	manufacturer := "&Make=" + strings.ReplaceAll(filter.Manufacturer, " ", "+")
 	status := "&state="
-
 	if filter.Status != "" {
 		if filter.Status == "ready" {
 			status += "4"

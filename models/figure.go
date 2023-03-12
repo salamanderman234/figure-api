@@ -9,10 +9,11 @@ type Figure struct {
 	Scale        string `json:"scale"`
 	Material     string `json:"material"`
 	Price        string `json:"price(jpy)"`
-	Code         string `json:"item_code"`
+	Code         string `json:"code"`
 	JANCode      string `json:"jan_code"`
 	ReleaseDate  string `json:"release_date"`
 	Thumbnail    string `json:"thumbnail"`
+	Source       string `json:"source"`
 }
 
 type FigureSearch struct {
