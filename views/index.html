@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<title>Figure Scrapper API</title>
+	</head>
+	<body>
+		<header class="bg-black text-white text-center py-5">
+			<h1 class="text-3xl font-bold">Anime Figure Scrapper API</h1>
+		</header>
+		<main class="bg-slate-200 px-5 md:px-20 py-5">
+			<div class="bg-white p-5 md:p-12 rounded-md mb-5">
+				<h2
+					class="font-bold text-2xl pb-2 mb-2 border-b-2 border-slate-200"
+				>
+					Example
+				</h2>
+				<div>
+					<span class="font-semibold">Endpoint :</span>
+					<br />
+					<div
+						class="bg-slate-400 text-white rounded-md py-3 px-5 my-2"
+					>
+						<a href="/api/figures?keyword=kato+megumi"
+							>/api/figures?keyword=kato+megumi</a
+						>
+					</div>
+					<span class="font-semibold">Result :</span>
+					<div
+						class="bg-black text-white rounded-md py-3 px-5 my-2 overflow-auto max-h-28"
+					>
+						<span id="example-result">{asiap: santuy}</span>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white p-5 md:p-12 rounded-md mb-5">
+				<h2
+					class="font-bold text-2xl pb-2 mb-2 border-b-2 border-slate-200"
+				>
+					Documentation
+				</h2>
+				<div>
+					<span class="pl-2 font-bold text-xl">Endpoint</span>
+					<div class="pl-7">
+						<div
+							class="bg-slate-400 mt-2 text-white rounded py-2 px-5"
+						>
+							<h3>/api/figures</h3>
+						</div>
+						<div class="my-2">
+							<span class="font-semibold">Description :</span>
+							<span>Get all figures by keyword</span>
+						</div>
+						<span class="font-semibold">Query Params :</span>
+						<div class="pl-9 my-2">
+							<div
+								class="border-b-2 border-slate-400 border-dashed pb-5 mb-3"
+							>
+								<h3
+									class="w-fit py-1 px-4 bg-slate-800 text-white text-center rounded-md italic"
+								>
+									keyword
+								</h3>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Type :
+									</span>
+									<span>string</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Status :
+									</span>
+									<span>required</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Description :
+									</span>
+									<span
+										>keyword of an item ex:
+										kato+megumi</span
+									>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Requirements :
+									</span>
+									<span
+										>the more specific the keywords entered,
+										the better the search speed will
+										be</span
+									>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Default :
+									</span>
+									<span>none (can't be empty)</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Possible value :
+									</span>
+									<span>text</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Example :</span
+									>
+								</div>
+								<div>
+									<div
+										class="flex justify-center items-center w-fit"
+									>
+										<span
+											class="bg-slate-400 text-white rounded-l-md pl-5 pr-1 py-1 border border-slate-400"
+											>/api/figures?keyword=</span
+										>
+										<input
+											class="border border-slate-400 py-1 pl-1 w-full md:w-32 rounded-r-md"
+											type="text"
+											value="kato+megumi"
+										/>
+									</div>
+									<span class="block text-xs text-yellow-600"
+										>*edit input value</span
+									>
+									<div class="my-1">
+										<span
+											class="font-semibold text-slate-800"
+											>Result :</span
+										>
+									</div>
+									<div
+										class="bg-black text-white px-5 py-2 rounded-md"
+									>
+										<span id="keyword-example-result"
+											>{result : asiap}</span
+										>
+									</div>
+								</div>
+							</div>
+
+							<div
+								class="border-b-2 border-slate-400 border-dashed pb-5 mb-3"
+							>
+								<h3
+									class="w-fit py-1 px-4 bg-slate-800 text-white text-center rounded-md italic"
+								>
+									source
+								</h3>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Type :
+									</span>
+									<span>string</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Status :
+									</span>
+									<span>optional</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Description :
+									</span>
+									<span>source of data</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Requirements :
+									</span>
+									<span>must match all possible</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Default :
+									</span>
+									<span
+										><a href="https://www.1999.co.jp/eng"
+											>hobby-search</a
+										></span
+									>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Possible value :
+									</span>
+									<span
+										><a href="https://www.1999.co.jp/eng"
+											>hobby-search</a
+										></span
+									>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Example :</span
+									>
+								</div>
+								<div>
+									<div
+										class="flex justify-center items-center w-fit"
+									>
+										<span
+											class="bg-slate-400 text-white rounded-l-md pl-5 pr-1 py-1 border border-slate-400"
+											>/api/figures?keyword=kato+megumi&source=</span
+										>
+										<input
+											class="border border-slate-400 py-1 pl-1 w-full md:w-32 rounded-r-md"
+											type="text"
+											value="hobby+search"
+										/>
+									</div>
+									<span class="block text-xs text-yellow-600"
+										>*edit input value</span
+									>
+									<div class="my-1">
+										<span
+											class="font-semibold text-slate-800"
+											>Result :</span
+										>
+									</div>
+									<div
+										class="bg-black text-white px-5 py-2 rounded-md"
+									>
+										<span id="source-example-result"
+											>{result : asiap}</span
+										>
+									</div>
+								</div>
+							</div>
+							<div
+								class="border-b-2 border-slate-400 border-dashed pb-5 mb-3"
+							>
+								<h3
+									class="w-fit py-1 px-4 bg-slate-800 text-white text-center rounded-md italic"
+								>
+									page
+								</h3>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Type :
+									</span>
+									<span>number</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Status :
+									</span>
+									<span>optional</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Description :
+									</span>
+									<span>pagination</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Requirements :
+									</span>
+									<span
+										>if the page filled exceeds the number
+										of pages from the keyword searched, it
+										will return 404</span
+									>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Default :
+									</span>
+									<span>1</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Possible value :
+									</span>
+									<span>any number</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Example :</span
+									>
+								</div>
+								<div>
+									<div
+										class="flex justify-center items-center w-fit"
+									>
+										<span
+											class="bg-slate-400 text-white rounded-l-md pl-5 pr-1 py-1 border border-slate-400"
+											>/api/figures?keyword=kato+megumi&page=</span
+										>
+										<input
+											class="border border-slate-400 py-1 pl-1 w-full md:w-32 rounded-r-md"
+											type="text"
+											value="1"
+										/>
+									</div>
+									<span class="block text-xs text-yellow-600"
+										>*edit input value</span
+									>
+									<div class="my-1">
+										<span
+											class="font-semibold text-slate-800"
+											>Result :</span
+										>
+									</div>
+									<div
+										class="bg-black text-white px-5 py-2 rounded-md"
+									>
+										<span id="page-example-result"
+											>{result : asiap}</span
+										>
+									</div>
+								</div>
+							</div>
+							<div
+								class="border-b-2 border-slate-400 border-dashed pb-5 mb-3"
+							>
+								<h3
+									class="w-fit py-1 px-4 bg-slate-800 text-white text-center rounded-md italic"
+								>
+									item_series
+								</h3>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Type :
+									</span>
+									<span>string</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Status :
+									</span>
+									<span>optional</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Description :
+									</span>
+									<span>series of an item</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Requirements :
+									</span>
+									<span>series of an item ex: nendoroid</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Default :
+									</span>
+									<span>none</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Possible value :
+									</span>
+									<span>text</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Example :</span
+									>
+								</div>
+								<div>
+									<div
+										class="flex justify-center items-center w-fit"
+									>
+										<span
+											class="bg-slate-400 text-white rounded-l-md pl-5 pr-1 py-1 border border-slate-400"
+											>/api/figures?keyword=kato+megumi&item_series=</span
+										>
+										<input
+											class="border border-slate-400 py-1 pl-1 w-full md:w-32 rounded-r-md"
+											type="text"
+											value="nendoroid"
+										/>
+									</div>
+									<span class="block text-xs text-yellow-600"
+										>*edit input value</span
+									>
+									<div class="my-1">
+										<span
+											class="font-semibold text-slate-800"
+											>Result :</span
+										>
+									</div>
+									<div
+										class="bg-black text-white px-5 py-2 rounded-md"
+									>
+										<span id="item-series-example-result"
+											>{result : asiap}</span
+										>
+									</div>
+								</div>
+							</div>
+							<div
+								class="border-b-2 border-slate-400 border-dashed pb-5 mb-3"
+							>
+								<h3
+									class="w-fit py-1 px-4 bg-slate-800 text-white text-center rounded-md italic"
+								>
+									status
+								</h3>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Type :
+									</span>
+									<span>string</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Status :
+									</span>
+									<span>optional</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Description :
+									</span>
+									<span>status of an item</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Requirements :
+									</span>
+									<span>must match all possible</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Default :
+									</span>
+									<span>none</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Possible value :
+									</span>
+									<span>preorder or ready</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Example :</span
+									>
+								</div>
+								<div>
+									<div
+										class="flex justify-center items-center w-fit"
+									>
+										<span
+											class="bg-slate-400 text-white rounded-l-md pl-5 pr-1 py-1 border border-slate-400"
+											>/api/figures?keyword=kato+megumi&status=</span
+										>
+										<input
+											class="border border-slate-400 py-1 pl-1 w-full md:w-32 rounded-r-md"
+											type="text"
+											value="preorder"
+										/>
+									</div>
+									<span class="block text-xs text-yellow-600"
+										>*edit input value</span
+									>
+									<div class="my-1">
+										<span
+											class="font-semibold text-slate-800"
+											>Result :</span
+										>
+									</div>
+									<div
+										class="bg-black text-white px-5 py-2 rounded-md"
+									>
+										<span id="status-example-result"
+											>{result : asiap}</span
+										>
+									</div>
+								</div>
+							</div>
+							<div
+								class="border-b-2 border-slate-400 border-dashed pb-5 mb-3"
+							>
+								<h3
+									class="w-fit py-1 px-4 bg-slate-800 text-white text-center rounded-md italic"
+								>
+									manufacturer
+								</h3>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Type :
+									</span>
+									<span>string</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Status :
+									</span>
+									<span>optional</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Description :
+									</span>
+									<span>manufacturer of an item</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Requirements :
+									</span>
+									<span
+										>manufacturer of an item ex:
+										max+factory</span
+									>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Default :
+									</span>
+									<span>none</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Possible value :
+									</span>
+									<span>text</span>
+								</div>
+								<div class="my-1">
+									<span class="font-semibold text-slate-800"
+										>Example :</span
+									>
+								</div>
+								<div>
+									<div
+										class="flex justify-center items-center w-fit"
+									>
+										<span
+											class="bg-slate-400 text-white rounded-l-md pl-5 pr-1 py-1 border border-slate-400"
+											>/api/figures?keyword=kato+megumi&manufacturer=</span
+										>
+										<input
+											class="border border-slate-400 py-1 pl-1 w-full md:w-32 rounded-r-md"
+											type="text"
+											value="max+factory"
+										/>
+									</div>
+									<span class="block text-xs text-yellow-600"
+										>*edit input value</span
+									>
+									<div class="my-1">
+										<span
+											class="font-semibold text-slate-800"
+											>Result :</span
+										>
+									</div>
+									<div
+										class="bg-black text-white px-5 py-2 rounded-md"
+									>
+										<span id="manufacturer-example-result"
+											>{result : asiap}</span
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="bg-black text-white text-center py-5">
+			<span
+				>Interested in the source code?
+				<a
+					target="_blank"
+					href="https://github.com/salamanderman234/figure-api"
+					>Click here !</a
+				></span
+			>
+		</footer>
+	</body>
+</html>

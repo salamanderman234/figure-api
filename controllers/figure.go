@@ -27,7 +27,7 @@ func (f *figureController) SearchFiguresWithFilter(c echo.Context) error {
 	if err != nil {
 		response := model.FailResponse{
 			Error:   "Bad Request",
-			Message: "Missing required field",
+			Message: "Something missing or inappropriate in your request",
 		}
 		return c.JSON(http.StatusBadRequest, response)
 	}
