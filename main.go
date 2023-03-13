@@ -24,7 +24,6 @@ func main() {
 	apiGroupList.Default = defaultApiGroup
 	// scrapper
 	amiAmiScrapper := tools.NewHobbySearchScrapper()
-
 	// service
 	figureService := service.NewFigureService(amiAmiScrapper)
 

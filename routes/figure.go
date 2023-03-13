@@ -15,14 +15,14 @@ func NewFigureRoute(f domain.FigureController, groupList model.RouteList) domain
 	return &figureRoute{
 		figureController: f,
 		groups:           groupList,
-		basePath:         "figure",
+		basePath:         "figures",
 	}
 }
 
 func (f *figureRoute) RegisterRoutes() {
 	mainRoute := f.groups.Default
 	mainRoute.GET(f.basePath, f.figureController.SearchFiguresWithFilter)
-	mainRoute.GET(f.basePath+"/:shop_code", f.figureController.SearchFigureWithShopCode)
+	// mainRoute.GET(f.basePath+"/:shop_code", f.figureController.SearchFigureWithShopCode)
 }
 
 // route list

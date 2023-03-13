@@ -2,6 +2,7 @@ package tools
 
 import (
 	"encoding/json"
+	"regexp"
 	"salamanderman234/figure-price-api/data"
 	"salamanderman234/figure-price-api/domain"
 	model "salamanderman234/figure-price-api/models"
@@ -26,15 +27,8 @@ func NewHobbySearchScrapper() domain.FigureScrapper {
 		searchUrl:        `/eng/search?`,
 		detailProductUrl: `/eng/`,
 		source:           "Hobby Search",
-		sourceMainLink:   "www.1999.co.jp",
+		sourceMainLink:   base,
 	}
-}
-
-func (a *hobbySearch) GetSource() string {
-	return a.source
-}
-func (a *hobbySearch) GetMainLink() string {
-	return a.sourceMainLink
 }
 
 func (a *hobbySearch) DetailProduct(code string) (model.Figure, error) {
@@ -96,7 +90,7 @@ func (a *hobbySearch) DetailProduct(code string) (model.Figure, error) {
 	}
 	price, ok := figureMap["sales_price"]
 	if ok {
-		figureMap["price(jpy)"] = price
+		figureMap["price(jpy)"], _ = strconv.Atoi(strings.ReplaceAll(price.(string), ",", ""))
 		figureMap["sales_price"] = ""
 	}
 	name := doc.Find("h2", "class", "h2_itemDetail").Text()
@@ -105,11 +99,31 @@ func (a *hobbySearch) DetailProduct(code string) (model.Figure, error) {
 	if len(thumbnailCandidate) >= 3 {
 		thumbnail += thumbnailCandidate[1].Attrs()["src"]
 	}
+	// get height
+	height := "-"
+	fullDescription := ""
+	heightRgx, _ := regexp.Compile(`approx (\d+)mm`)
+	descriptionContainer := doc.Find("div", "class", "bikou")
+	if descriptionContainer.Error == nil {
+		descriptions := descriptionContainer.FindAll("div")
+		for _, description := range descriptions {
+			text := description.FullText()
+			if height != "" {
+				posibleHeight := heightRgx.FindString(text)
+				if posibleHeight != "" {
+					height = posibleHeight
+				}
+			}
+			fullDescription += text
+		}
+	}
 
 	figureMap["name"] = name
 	figureMap["thumbnail"] = thumbnail
 	figureMap["code"] = code
 	figureMap["source"] = a.source
+	figureMap["height"] = strings.ReplaceAll(height, "approx ", "")
+	figureMap["description"] = fullDescription
 	// mapping back to model
 	jsonByte, _ := json.Marshal(figureMap)
 	json.Unmarshal(jsonByte, &figure)
